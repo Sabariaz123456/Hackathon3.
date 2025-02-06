@@ -66,3 +66,6 @@ const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
 };
 
 export default ProductPage;
+
+
+// w8 dkhta ho// gg ok
