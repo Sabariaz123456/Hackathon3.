@@ -3,17 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+
+    "import-data": "node scripts/importSanityData.mjs"
   },
   "dependencies": {
+    "@sanity/client": "^6.27.2",
+    "@sanity/image-url": "^1.1.0",
+    "@sanity/vision": "^3.70.0",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "fetch": "^1.1.0",
     "lucide-react": "0.468.0",
-    "next": "14.2.16",
+    "next": "^15.1.5",
+    "next-sanity": "^9.8.39",
+    "node": "^22.13.0",
+    "node-fetch": "^3.3.2",
     "react": "^18",
     "react-dom": "^18",
-    "sharp": "^0.33.5"
+    "sanity": "^3.71.2",
+    "sharp": "^0.33.5",
+    "styled-components": "^6.1.14",
+    "sweetalert2": "^11.6.13"
   },
   "devDependencies": {
     "@types/node": "^20",

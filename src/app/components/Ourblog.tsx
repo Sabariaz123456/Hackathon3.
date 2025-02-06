@@ -1,129 +1,97 @@
-import Image from "next/image"
-import image1 from"../../../Gallery/Group 53.png"
-import image2 from "../../../Gallery/Group 48.png"
-import image3 from "../../../Gallery/Group 49.png"
-import image4 from "../../../Gallery/Group 50.png"
-import image5 from"../../../Gallery/Group 47.png"
+// components/Whatshopping.tsx
+'use client';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import Swal from 'sweetalert2';
+import { allProducts } from '../../sanity/lib/queries'; // Path to queries
+import { Product } from '../../types/product';// Assuming you have a type for products
+import { urlFor } from '../../sanity/lib/image';// Path to urlFor utility
+import { client } from '../../sanity/lib/client';
+import { addToCart } from '../../app/actions/actions';
 
+const Whatshopping = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
-export default function Blog(){
-    return(
-        <><div className="w-4/6 h-[260px] p-4 overflow-hidden flex justify-center items-center mx-auto aspect-w-16 aspect-h-8">
-            <Image
-                src={image1}
-                width={400}
-                height={200}
-                alt="pic" />
-        </div><div className="font-sans p-4 mx-auto lg:max-w-6xl md:max-w-4xl">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-16">
+  // Fetch products dynamically on component mount
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const fetchedProducts = await client.fetch(allProducts); // Fetch data from Sanity
+        setProducts(fetchedProducts); // Update state with fetched data
+      } catch (error) {
+        console.error("Error fetching products:", error); // ✅ Now 'error' is used
+        setError('Error fetching products. Please try again later.'); // Set error state if fetching fails
+      }
+    };
 
-                    <div className="bg-white overflow-hidden cursor-pointer">
-                        <div className="w-full h-[150px] overflow-hidden mx-auto aspect-w-16 aspect-h-8">
-                        <Image 
-                        src={image2}
-                        width={400}
-                        height={200}
-                        alt="pic"/>                        </div>
+    fetchProducts();
+  }, []); // Empty array ensures this runs once when the component mounts
 
-<div className="mt-6 text-center">
-                            <h3 className="text-small font-medium text-gray-800">Going all in with millinial design</h3>
-                            <button className="flex mx-auto mt-6 text-black border-b-2 text-border-underline-black   underline-bg-black hover:border-indigo-500 ">
-      Read more
-    </button>                      </div>
+  // Handle adding to cart
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
+    e.preventDefault(); // Prevent default link navigation
 
-                        <div className="flex justify-center space-x-1 mt-3">
-                            <svg className="w-4 fill-[#facc15]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg className="w-4 fill-[#facc15]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg className="w-4 fill-[#facc15]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg className="w-4 fill-[#facc15]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg className="w-4 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                        </div>
-                    </div>
+    Swal.fire({
+      position: 'top-right',
+      icon: 'success',
+      title: `${product.name} added to cart`,
+      showConfirmButton: false,
+      timer: 1000,
+    });
 
-                    <div className="bg-white overflow-hidden cursor-pointer">
-                        <div className="w-full h-[150px] overflow-hidden mx-auto aspect-w-16 aspect-h-8">
-                        <Image 
-                        src={image3}
-                        width={400}
-                        height={200}
-                        alt="pic"/>                         </div>
+    addToCart(product); // Assuming addToCart adds product to some global state or cart
+  };
 
-<div className="mt-6 text-center">
-                            <h3 className="text-small font-medium text-gray-800">Going all in with millinial design</h3>
-                            <button className="flex mx-auto mt-6 text-black border-b-2 text-border-underline-black   underline-bg-black hover:border-indigo-500 ">
-      Read more
-    </button>                      </div>
-                        <div className="flex justify-center space-x-1 mt-3">
-                            <svg className="w-4 fill-[#facc15]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg className="w-4 fill-[#facc15]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg className="w-4 fill-[#facc15]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg className="w-4 fill-[#facc15]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg className="w-4 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                        </div>
-                    </div>
+  if (error) {
+    return <div className="text-center text-red-500">{error}</div>; // Show error message if fetching fails
+  }
 
-                    <div className="bg-white overflow-hidden cursor-pointer">
-                        <div className="w-full h-[150px] overflow-hidden mx-auto aspect-w-16 aspect-h-8">
-                        <Image 
-                        src={image4}
-                        width={600}
-                        height={400}
-                        alt="pic"/>                                 
-                        </div>
-
-                        <div className="mt-6 text-center">
-                            <h3 className="text-small font-medium text-gray-800">Going all in with millinial design</h3>
-                            <button className="flex mx-auto mt-6 text-black border-b-2 text-border-underline-black   underline-bg-black hover:border-indigo-500 ">
-      Read more
-    </button>                      </div>
+  return (
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-6 text-center">Products</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {products.length === 0 ? (
+          <div className="col-span-full text-center text-gray-500">No products available</div>
+        ) : (
+          products.map((product) => (
+            <div
+              key={product._id}
+              className="border rounded-lg shadow-lg p-4 hover:shadow-xl transition duration-300"
+            >
+              <Link href={`/Cart/${product.slug?.current}`} passHref>
+                <div>
+                  {product.image && (
+                    <Image
+                      src={urlFor(product.image).url()} // Get the image URL using urlFor
+                      alt={product.name || 'Product Image'}
+                      width={200}
+                      height={200}
+                      className="w-full h-auto object-cover rounded-md"
+                    />
+                  )}
+                  <h3 className="mt-4 text-lg font-semibold text-gray-800">
+                    {product.name}
+                  </h3>
+                  {product.price && (
+                    <p className="text-gray-600 mt-2">Price: ${product.price}</p>
+                  )}
+                </div>
+              </Link>
+              <button
+                className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg hover:scale-110 transition-transform duration-300 ease-in-out mt-4 w-full"
+                onClick={(e) => handleAddToCart(e, product)}
+              >
+                Add To Cart
+              </button>
+            </div>
+          ))
+        )}
+      </div>
     </div>
-    </div>  
-                    </div>
+  );
+};
 
-                    <div className="bg-white overflow-hidden cursor-pointer">
-                        </div>
-                        <div className="bg-white overflow-hidden cursor-pointer">
-                        <Image 
-                        src={image5}
-                        width={1400}
-                        height={600}
-                        alt="pic"/>         <br></br>               </div><br></br>
-                        
-                   
+export default Whatshopping;
 
-
-                   
-          
-
-            </>)}
- 

@@ -1,8 +1,8 @@
-import Hero from "./components/hero2"
-import NewArrwa from "./components/NewArrwa"
+import Hero from "../app/components/hero2"
+import NewArrwa from "../app/components/NewArrwa"
 import Hero2 from "./Hero2/page"
-import Toppicks from "./components/TopPicks"
-import Blog from "./components/Ourblog"
+import Toppicks from "../app/components/TopPicks"
+import Whatshopping from "../app/components/Ourblog"
 export default function Home() {
   return (
     <div >
@@ -10,6 +10,6 @@ export default function Home() {
       <Hero2/>
       <NewArrwa/>
       <Toppicks/>
-      <Blog/>
+      <Whatshopping/>
     </div>
   )}

@@ -1,0 +1,67 @@
+[
+  {
+    "fields": [
+      {
+        "name": "name",
+        "type": "string",
+        "title": "Product Name"
+      },
+      {
+        "options": {
+          "source": "name",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "name": "price",
+        "type": "number"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "name": "discountPercentage",
+        "type": "number"
+      },
+      {
+        "name": "isFeaturedProduct",
+        "type": "boolean",
+        "title": "Featured Product"
+      },
+      {
+        "name": "stockLevel",
+        "type": "number"
+      },
+      {
+        "name": "category",
+        "type": "string"
+      }
+    ],
+    "name": "product",
+    "type": "document"
+  }
+]

@@ -67,7 +67,11 @@ export default function Cart2(){
             <div className="grid grid-cols-3 items-start gap-4">
               <div className="col-span-2 flex items-start gap-4">
                 <div className="w-28 h-28 max-sm:w-24 max-sm:h-24 shrink-0 bg-gray-100 p-2 rounded-md">
-                  <img src='https://readymadeui.com/images/watch5.webp' className="w-full h-full object-contain" />
+                  <Image
+                  height={600}
+                  width={400}
+                   src='https://readymadeui.com/images/watch5.webp' className="w-full h-full object-contain"
+                   alt="pic" />
                 </div>
 
                 <div className="flex flex-col">
@@ -106,7 +110,11 @@ export default function Cart2(){
             <div className="grid grid-cols-3 items-start gap-4">
               <div className="col-span-2 flex items-start gap-4">
                 <div className="w-28 h-28 max-sm:w-24 max-sm:h-24 shrink-0 bg-gray-100 p-2 rounded-md">
-                  <img src='https://readymadeui.com/images/watch4.webp' className="w-full h-full object-contain" />
+                  <Image
+                  height={600}
+                  width={400}
+                    alt="pic"
+                   src='https://readymadeui.com/images/watch4.webp' className="w-full h-full object-contain" />
                 </div>
 
                 <div className="flex flex-col">
@@ -145,7 +153,11 @@ export default function Cart2(){
             <div className="grid grid-cols-3 items-start gap-4">
               <div className="col-span-2 flex items-start gap-4">
                 <div className="w-28 h-28 max-sm:w-24 max-sm:h-24 shrink-0 bg-gray-100 p-2 rounded-md">
-                  <img src='https://readymadeui.com/images/watch7.webp' className="w-full h-full object-contain" />
+                  <Image
+                  height={600} 
+                  width={400}
+                  alt="pic"
+                  src='https://readymadeui.com/images/watch7.webp' className="w-full h-full object-contain" />
                 </div>
 
                 <div className="flex flex-col">
