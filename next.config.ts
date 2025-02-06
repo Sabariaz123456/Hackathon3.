@@ -9,6 +9,7 @@ const nextConfig = {
     // Add alias for '@' to map to the 'src' folder
     config.resolve.alias['@'] = path.resolve(__dirname, 'src');
     return config;
+    
   },
 };
 

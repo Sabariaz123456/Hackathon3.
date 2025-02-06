@@ -6,7 +6,6 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-
     "import-data": "node scripts/importSanityData.mjs"
   },
   "dependencies": {
@@ -17,7 +16,7 @@
     "dotenv": "^16.4.7",
     "fetch": "^1.1.0",
     "lucide-react": "0.468.0",
-    "next": "^15.1.5",
+    "next": "^15.1.6",
     "next-sanity": "^9.8.39",
     "node": "^22.13.0",
     "node-fetch": "^3.3.2",
